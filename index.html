@@ -10,46 +10,72 @@
       background-size: cover;
       color: #f5e6b3;
       margin: 0;
-      padding: 20px;
+      padding: 60px 15px 100px 15px; /* сверху 60px, снизу 100px */
     }
 
     h1, h2 {
       text-align: center;
       color: #ffd966;
-      text-shadow: 0 0 10px #6a0dad;
+      text-shadow: 0 0 8px #6a0dad;
+      margin-top: 20px;
+      margin-bottom: 15px;
     }
 
     .section {
-      background: rgba(30, 0, 50, 0.75);
+      background: rgba(30, 0, 50, 0.82);
       border: 1px solid #ffd966;
-      border-radius: 12px;
+      border-radius: 10px;
       padding: 15px;
-      margin: 20px auto;
-      max-width: 700px;
+      margin: 15px auto;
+      max-width: 750px;
     }
 
     label {
       display: block;
-      margin: 8px 0;
-      font-size: 16px;
+      margin: 10px 0;
+      font-size: 1em;
       cursor: pointer;
+      line-height: 1.4;
     }
 
     input[type="checkbox"] {
-      margin-right: 8px;
-      transform: scale(1.3);
+      margin-right: 10px;
+      transform: scale(1.4);
     }
 
-    /* Карта таро */
+    button {
+      padding: 12px 24px;
+      font-size: 1.1em;
+      border: none;
+      border-radius: 8px;
+      background: #ffd966;
+      color: #3d0066;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 0 10px #6a0dad;
+      transition: 0.3s;
+      margin-bottom: 20px; /* отступ под кнопкой */
+    }
+
+    button:hover {
+      background: #ffea9e;
+    }
+
+    /* Контейнер для кнопки + карты */
+    .result-block {
+      display: flex;
+      flex-direction: column;
+      align-items: center; /* центрирует и кнопку, и карту */
+      margin-top: 30px;
+      margin-bottom: 80px; /* воздух под картой */
+    }
+
     .card-container {
       perspective: 1000px;
-      display: flex;
-      justify-content: center;
-      margin-top: 40px;
     }
 
     .card {
-      width: 250px;
+      width: 260px;
       height: 400px;
       transform-style: preserve-3d;
       transition: transform 1s;
@@ -84,26 +110,23 @@
       justify-content: center;
       padding: 20px;
       text-align: center;
-      font-size: 18px;
+      font-size: 1.05em;
       line-height: 1.5;
+      box-shadow: inset 0 0 15px #ffd966;
     }
 
-    button {
-      display: block;
-      margin: 20px auto;
-      padding: 10px 20px;
-      font-size: 18px;
-      border: none;
-      border-radius: 8px;
-      background: #ffd966;
-      color: #3d0066;
-      font-weight: bold;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-
-    button:hover {
-      background: #ffea9e;
+    /* 📱 Адаптивность */
+    @media (max-width: 600px) {
+      h1 { font-size: 1.3em; }
+      h2 { font-size: 1em; }
+      label { font-size: 0.95em; }
+      .section { padding: 12px; }
+      .card {
+        width: 80%;
+        height: auto;
+        max-height: 60vh;
+      }
+      .card-back { font-size: 0.9em; padding: 15px; }
     }
   </style>
 </head>
@@ -143,13 +166,15 @@
     <label><input type="checkbox">Ученики иногда меняют мнение после новых фактов</label>
   </div>
 
-  <button onclick="showResult()">Показать результат</button>
-
-  <div class="card-container">
-    <div class="card" id="resultCard">
-      <div class="card-face card-front"></div>
-      <div class="card-face card-back" id="resultText">
-        <!-- Здесь появится результат -->
+  <!-- Блок кнопка + карта -->
+  <div class="result-block">
+    <button onclick="showResult()">Показать результат</button>
+    <div class="card-container">
+      <div class="card" id="resultCard">
+        <div class="card-face card-front"></div>
+        <div class="card-face card-back" id="resultText">
+          <!-- Здесь появится результат -->
+        </div>
       </div>
     </div>
   </div>
