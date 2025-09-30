@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Чек-лист критического мышления</title>
+  <style>
+    body {
+      font-family: 'Georgia', serif;
+      background: url('https://img.genially.com/64233afb55129a0017751c8e/58383ef0-9424-4b01-9bc6-994aebedaff9.png') no-repeat center center fixed;
+      background-size: cover;
+      color: #f5e6b3;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1, h2 {
+      text-align: center;
+      color: #ffd966;
+      text-shadow: 0 0 10px #6a0dad;
+    }
+
+    .section {
+      background: rgba(30, 0, 50, 0.75);
+      border: 1px solid #ffd966;
+      border-radius: 12px;
+      padding: 15px;
+      margin: 20px auto;
+      max-width: 700px;
+    }
+
+    label {
+      display: block;
+      margin: 8px 0;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    input[type="checkbox"] {
+      margin-right: 8px;
+      transform: scale(1.3);
+    }
+
+    /* Карта таро */
+    .card-container {
+      perspective: 1000px;
+      display: flex;
+      justify-content: center;
+      margin-top: 40px;
+    }
+
+    .card {
+      width: 250px;
+      height: 400px;
+      transform-style: preserve-3d;
+      transition: transform 1s;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .card.flip {
+      transform: rotateY(180deg);
+    }
+
+    .card-face {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .card-front {
+      background: url('https://img.genially.com/5cdbd9febef14a0fcc951e75/2d6024a5-67f3-436b-a7f0-8cc592abcc49.png') no-repeat center center;
+      background-size: cover;
+    }
+
+    .card-back {
+      background: #3d0066;
+      color: #ffd966;
+      transform: rotateY(180deg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      text-align: center;
+      font-size: 18px;
+      line-height: 1.5;
+    }
+
+    button {
+      display: block;
+      margin: 20px auto;
+      padding: 10px 20px;
+      font-size: 18px;
+      border: none;
+      border-radius: 8px;
+      background: #ffd966;
+      color: #3d0066;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #ffea9e;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Чек-лист критического мышления</h1>
+  <p style="text-align:center;">Отметьте ✔️ пункты, которые вы делаете регулярно</p>
+
+  <div class="section">
+    <h2>Вопросы и задания</h2>
+    <label><input type="checkbox">Я задаю вопросы без единственного правильного ответа</label>
+    <label><input type="checkbox">Я прошу учеников обосновывать ответы</label>
+    <label><input type="checkbox">На уроках есть задания на сравнение, классификацию</label>
+    <label><input type="checkbox">Я даю упражнения на различие фактов и мнений</label>
+  </div>
+
+  <div class="section">
+    <h2>Работа с информацией</h2>
+    <label><input type="checkbox">Мы обсуждаем разные точки зрения</label>
+    <label><input type="checkbox">Ученики учатся находить и исправлять ошибки</label>
+    <label><input type="checkbox">Мы проверяем достоверность информации</label>
+    <label><input type="checkbox">Ученики замечают отсутствующую или лишнюю информацию</label>
+  </div>
+
+  <div class="section">
+    <h2>Коммуникация и аргументация</h2>
+    <label><input type="checkbox">Ученики участвуют в мини-дебатах и ролевых играх</label>
+    <label><input type="checkbox">Я использую фразы-шаблоны для поддержки слабых</label>
+    <label><input type="checkbox">Ученики учатся слушать аргументы других</label>
+    <label><input type="checkbox">Мы практикуем задания «За и против» и «Проблемное решение»</label>
+  </div>
+
+  <div class="section">
+    <h2>Рефлексия и саморегуляция</h2>
+    <label><input type="checkbox">В конце урока ученики делают мини-выводы</label>
+    <label><input type="checkbox">Я поощряю самопроверку и исправление ошибок</label>
+    <label><input type="checkbox">Ученики иногда меняют мнение после новых фактов</label>
+  </div>
+
+  <button onclick="showResult()">Показать результат</button>
+
+  <div class="card-container">
+    <div class="card" id="resultCard">
+      <div class="card-face card-front"></div>
+      <div class="card-face card-back" id="resultText">
+        <!-- Здесь появится результат -->
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function showResult() {
+      const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+      let count = 0;
+      checkboxes.forEach(cb => { if (cb.checked) count++; });
+
+      let message = "";
+      if (count < 5) {
+        message = "🌑 Туман скрывает путь… Начни с простых чар: Odd one out, «За и против».";
+      } else if (count < 11) {
+        message = "🔥 Искры уже горят, но костёр ещё слаб. Добавь дебаты и сравнение текстов.";
+      } else if (count < 16) {
+        message = "🌟 Твоя магия крепнет. КМ стало частью уроков. Ученики видят истину сквозь иллюзии.";
+      } else {
+        message = "✨ Ты — архимаг критического мышления. Делись искусством с коллегами!";
+      }
+
+      document.getElementById("resultText").innerText = message;
+      document.getElementById("resultCard").classList.add("flip");
+    }
+  </script>
+</body>
+</html>
